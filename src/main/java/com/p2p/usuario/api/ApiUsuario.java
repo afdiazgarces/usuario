@@ -1,6 +1,7 @@
 package com.p2p.usuario.api;
 
 import com.p2p.usuario.dto.Usuario;
+import com.p2p.usuario.dto.Login;
 import com.p2p.usuario.entities.EntitiUsuario;
 import com.p2p.usuario.services.ServicesUsuario;
 import org.dozer.Mapper;
@@ -43,8 +44,8 @@ public class ApiUsuario {
     }
 
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
-    public void saveUsuario(@RequestBody Usuario empresa){
-        EntitiUsuario entitiEmpresa =mapper.map(empresa,EntitiUsuario.class);
+    public void saveUsuario(@RequestBody Usuario usuario){
+        EntitiUsuario entitiEmpresa =mapper.map(usuario,EntitiUsuario.class);
         servicesEmpresa.save(entitiEmpresa);
     }
     
@@ -64,4 +65,22 @@ public class ApiUsuario {
         }
         return list;
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public List<Usuario> getLogin(@RequestBody Login login){
+        List<EntitiUsuario> all =  servicesEmpresa.getUsuarioLogin(login.getCorreo(),login.getPassword());
+        //List<Usuario> list = new LinkedList<>();
+        LinkedList list = new LinkedList();
+        for (EntitiUsuario dto:all){
+            Usuario map = mapper.map(dto,Usuario.class);
+            list.add(map);
+        }
+        if(list.size()>0){
+            list.add(0,true);
+        }else{
+           list.add(0,false); 
+        }
+        return list;
+    }
+    
 }
