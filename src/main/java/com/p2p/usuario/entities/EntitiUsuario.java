@@ -21,6 +21,7 @@ public class EntitiUsuario implements Serializable {
     String empresa;
     String estado;
     String roll;
+    String token;
 
     @Override
     public String toString() {
@@ -123,5 +124,14 @@ public class EntitiUsuario implements Serializable {
         this.roll = roll;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
+    
 
 }

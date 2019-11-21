@@ -14,6 +14,7 @@ public class Usuario {
     String empresa;
     String roll;
     String estado;
+    String token;
 
     @Override
     public String toString() {
@@ -117,4 +118,12 @@ public class Usuario {
         this.estado = estado;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
 }
