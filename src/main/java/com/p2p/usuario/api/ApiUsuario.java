@@ -83,7 +83,7 @@ public class ApiUsuario {
         }
         
        // System.out.println(u.toString());
-        String token = getJWTToken(correo);
+        String token = getJWTToken(u);
 	u.setToken(token);
         //System.out.println(u.toString());
         
@@ -107,15 +107,15 @@ public class ApiUsuario {
         return list;
     }
     
-    private String getJWTToken(String username) {
+    private String getJWTToken(Usuario usuario) {
 		String secretKey = "mySecretKey";
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList("ROLE_USER");
+				.commaSeparatedStringToAuthorityList(usuario.getRoll());
 		
 		String token = Jwts
 				.builder()
 				.setId("softtekJWT")
-				.setSubject(username)
+				.setSubject(usuario.getCorreo())
 				.claim("authorities",
 						grantedAuthorities.stream()
 								.map(GrantedAuthority::getAuthority)
